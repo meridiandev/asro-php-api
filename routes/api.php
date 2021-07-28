@@ -19,6 +19,16 @@ use App\Models\Report;
 |
 */
 
+/**
+** Basic Routes for a RESTful service:
+**
+** Route::get($uri, $callback);
+** Route::post($uri, $callback);
+** Route::put($uri, $callback);
+** Route::delete($uri, $callback);
+**
+**/
+
 // публичные пути что в доступе для всех
 Route::get('/reports', [ReportController::class, 'index']);
 //Route::resource('reports', ReportController::class);

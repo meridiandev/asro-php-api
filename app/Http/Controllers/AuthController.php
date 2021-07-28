@@ -30,7 +30,7 @@ class AuthController extends Controller
             'token' => $token
         ];
 
-        return response($response, 201);
+        return response()->json($response, 201);
     }
 
     public function login(Request $request) {
@@ -44,7 +44,7 @@ class AuthController extends Controller
 
         // Проверка пароля
         if(!$user || !Hash::check($fields['password'], $user->password)){
-            return response([
+            return response()->json([
                 'message' => 'Возникла проблема при входе, проверьте данные'
             ], 401);
         }
@@ -56,14 +56,14 @@ class AuthController extends Controller
             'token' => $token
         ];
 
-        return response($response, 201);
+        return response()->json($response, 201);
     }
 
     public function logout(Request $request) {
         auth()->user()->tokens()->delete();
 
-        return [
+        return response()->json([
             'message' => 'Вы вышли из системы!'
-        ];
+        ]);
     }
 }
