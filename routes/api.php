@@ -4,7 +4,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\AuthController;
 use App\Models\Report;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +22,8 @@ use App\Models\Report;
 // публичные пути что в доступе для всех
 Route::get('/reports', [ReportController::class, 'index']);
 //Route::resource('reports', ReportController::class);
+
+Route::post('/signup', [AuthController::class, 'register']);
 
 // Защищенные пути через Laravel/Sanctum
 Route::group(['middleware' => ['auth:sanctum']], function(){
