@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\ReportController;
 use App\Models\Report;
 
 /*
@@ -16,14 +17,10 @@ use App\Models\Report;
 |
 */
 
-Route::get('/reports', function(){
-    // Вывод всех отчетов
-    return Report::all();
-});
+// App\Http\Controllers\ReportController->index
+Route::get('/reports', [ReportController::class, 'index']);
 
-Route::post('/reports', function(){
-
-});
+Route::post('/reports', [ReportController::class, 'store']);
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
