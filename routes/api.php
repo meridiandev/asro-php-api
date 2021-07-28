@@ -23,7 +23,9 @@ use App\Models\Report;
 Route::get('/reports', [ReportController::class, 'index']);
 //Route::resource('reports', ReportController::class);
 
+// Пользователь - регистрация/вход
 Route::post('/signup', [AuthController::class, 'register']);
+Route::post('/signin', [AuthController::class, 'login']);
 
 // Защищенные пути через Laravel/Sanctum
 Route::group(['middleware' => ['auth:sanctum']], function(){
@@ -31,6 +33,8 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
     Route::post('/reports', [ReportController::class, 'store']);
     Route::put('/reports/{$id}', [ReportController::class, 'update']);
     Route::put('/reports/{$id}', [ReportController::class, 'destroy']);
+    // Пользователь - выход
+    Route::post('/signout', [AuthController::class, 'logout']);
     // Поиск
     Route::get('/reports/search/{full_name}', [ReportController::class, 'search']);
 });
