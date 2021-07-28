@@ -17,10 +17,13 @@ use App\Models\Report;
 |
 */
 
-// App\Http\Controllers\ReportController->index
-Route::get('/reports', [ReportController::class, 'index']);
+Route::resource('reports', ReportController::class);
+Route::get('/reports/search/{full_name}', [ReportController::class, 'search']);
 
-Route::post('/reports', [ReportController::class, 'store']);
+// App\Http\Controllers\ReportController->index
+// Route::get('/reports', [ReportController::class, 'index']);
+
+// Route::post('/reports', [ReportController::class, 'store']);
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

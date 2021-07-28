@@ -82,7 +82,10 @@ class ReportController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $report = Report::find($id);
+        $report->update($request->all());
+
+        return $report;
     }
 
     /**
@@ -93,6 +96,17 @@ class ReportController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return Report::destroy($id);
+    }
+
+     /**
+     * Search for full_name
+     *
+     * @param  str  $full_name
+     * @return \Illuminate\Http\Response
+     */
+    public function search($full_name)
+    {
+        return Report::where('full_name', 'like', '%' . $full_name . '%')->get();
     }
 }
