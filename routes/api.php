@@ -17,13 +17,20 @@ use App\Models\Report;
 |
 */
 
-Route::resource('reports', ReportController::class);
-Route::get('/reports/search/{full_name}', [ReportController::class, 'search']);
+// публичные пути что в доступе для всех
+Route::get('/reports', [ReportController::class, 'index']);
+//Route::resource('reports', ReportController::class);
 
-// App\Http\Controllers\ReportController->index
-// Route::get('/reports', [ReportController::class, 'index']);
+// Защищенные пути через Laravel/Sanctum
+Route::group(['middleware' => ['auth:sanctum']], function(){
+    //Route::get('/reports', [ReportController::class, 'index']);
+    Route::post('/reports', [ReportController::class, 'store']);
+    Route::put('/reports/{$id}', [ReportController::class, 'update']);
+    Route::put('/reports/{$id}', [ReportController::class, 'destroy']);
+    // Поиск
+    Route::get('/reports/search/{full_name}', [ReportController::class, 'search']);
+});
 
-// Route::post('/reports', [ReportController::class, 'store']);
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
