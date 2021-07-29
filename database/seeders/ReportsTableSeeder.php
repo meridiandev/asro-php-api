@@ -29,7 +29,6 @@ class ReportsTableSeeder extends Seeder
                 'event_document' => $faker->randomNumber(8),
                 'event_who' => $faker->text,
                 'event_number' => $faker->randomNumber(10)
-
             ]);
         }
     }

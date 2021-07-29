@@ -4,13 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 class Report extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'full_name',    //  Ф.И.О. педагога
+        'user_id',   
         'event_form',   //  Форма мероприятия
                                         //  0 - семинары
                                         //  1 - научно-практические семинары
@@ -31,4 +32,8 @@ class Report extends Model
         'event_who', // кто выдал документ
         'event_number', // № документа
     ];
+
+    public function users(){
+        return $this->hasMany(User::class);
+    }
 }

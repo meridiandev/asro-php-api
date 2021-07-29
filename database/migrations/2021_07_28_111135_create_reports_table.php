@@ -15,7 +15,10 @@ class CreateReportsTable extends Migration
     {
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
-            $table->string('full_name');    //  Ф.И.О. педагога
+            //создание поля для связывания с таблицей user
+            $table->unsignedBigInteger('user_id')->unsigned()->default(1);
+            //создание внешнего ключа для поля 'user_id', который связан с полем id таблицы 'users'
+            $table->foreign('user_id')->references('id')->on('users');
             $table->string('event_form');   //  Форма мероприятия
                                             //  0 - семинары
                                             //  1 - научно-практические семинары

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Report;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class ReportController extends Controller
 {
@@ -35,9 +36,11 @@ class ReportController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $request->validate([
-            'full_name' => 'required',
+    {      
+        $user = User::find(2);
+
+        $rules = [
+            //'full_name' => 'required',
             'event_form'=> 'required',   
             'event_level'=> 'required',  
             'event_date'=> 'required',     
@@ -46,9 +49,36 @@ class ReportController extends Controller
             'event_document'=> 'required', 
             'event_who'=> 'required', 
             'event_number'=> 'required'
+        ];
+
+        $messages = [
+            //'full_name' => 'required',
+            'event_form.required'=> 'Выберите из списка форму мероприятия',   
+            'event_level.required'=> 'Выберите из списка уровень мероприятия',  
+            'event_date.required'=> 'Введите дату проведения мероприятия',     
+            'event_full_name.required'=> 'Полное название мероприятия',  
+            'event_hours.required'=> 'Количество часов',  
+            'event_document.required'=> 'Выберите из списка документ, подтверждаюший участие', 
+            'event_who.required'=> 'Укажите кто выдал документ', 
+            'event_number.required'=> 'Укажите № документа'
+        ];
+
+        $report = new Report([
+            'event_form' => $request->get('event_form'),
+            'event_level' => $request->get('event_level'),
+            'event_date' => $request->get('event_date'),
+            'event_full_name' => $request->get('event_full_name'),
+            'event_hours' => $request->get('event_hours'),
+            'event_document' => $request->get('event_document'),
+            'event_who' => $request->get('event_who'),
+            'event_number' => $request->get('event_number'),
         ]);
 
-        return Report::create($request->all());
+        $this->validate($request, $rules, $messages);
+
+        $user->reports()->save($report);
+
+        return $request->all();
     }
 
     /**
