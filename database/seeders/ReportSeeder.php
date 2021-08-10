@@ -16,7 +16,7 @@ class ReportSeeder extends Seeder
     {
         $reports = [
             [
-                'full_name' => 'Василий Сергеев',
+                'user_id' => '1',
                 'event_form' => 'вебинары',
                 'event_level' => 'областной',
                 // Y-m-d

@@ -20,7 +20,8 @@ class ReportsTableSeeder extends Seeder
 
         for ($i = 0; $i < 500; $i++) {
             Report::create([
-                'full_name' => $faker->name,
+                //'full_name' => $faker->name,
+                'user_id' => $faker->numberBetween($min = 1, $max = 499),
                 'event_form' => $faker->text,
                 'event_level' => $faker->text,
                 'event_date' => $faker->date('Y-m-d', 'now'),
